@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE SECRET FILE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:#e8d6a5;font-family:Georgia,serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:22px}
+.container{width:100%;max-width:520px;border:1px solid #b89548;padding:30px 22px;text-align:center;background:linear-gradient(145deg,#151515,#080808);box-shadow:0 0 35px #b8954820}
+.gold{color:#d5b45d}
+.small{letter-spacing:4px;font-size:10px;color:#a58b50}
+h1{font-size:34px;letter-spacing:4px;margin:18px 0}
+p{line-height:1.8;color:#c5b995}
+.line{height:1px;background:#80662e;margin:24px 0}
+button{background:#c5a34d;color:#100e08;border:0;padding:14px 24px;font-weight:bold;letter-spacing:2px;cursor:pointer;margin-top:15px}
+input{width:100%;padding:15px;background:#111;color:#e8d6a5;border:1px solid #80662e;margin-top:18px;text-align:center;font-size:16px}
+.hidden{display:none}
+#feedback{color:#d5b45d;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="small">CLASSIFIED • CONFIDENTIAL</div>
+<h1 class="gold">THE SECRET FILE</h1>
+<p>ARQUIVO Nº 001 — ACESSO RESTRITO</p>
+<div class="line"></div>
+
+<section id="intro">
+<h2>Você foi selecionado.</h2>
+<p>Uma investigação confidencial foi aberta.</p>
+<p>Existem oito arquivos esperando por você.</p>
+<p>Cada resposta revelará uma nova parte desta história.</p>
+<p><b>Você está preparado para descobrir a verdade?</b></p>
+<button onclick="start()">INICIAR INVESTIGAÇÃO</button>
+</section>
+
+<section id="game" class="hidden">
+<div class="small" id="number"></div>
+<h2 id="question"></h2>
+<p id="hint"></p>
+<input id="answer" placeholder="DIGITE SUA RESPOSTA" onkeydown="if(event.key==='Enter')check()">
+<p id="feedback"></p>
+<button onclick="check()">DESBLOQUEAR ARQUIVO</button>
+</section>
+
+<section id="final" class="hidden">
+<div class="small">CLASSIFICAÇÃO: REVELAÇÃO FINAL</div>
+<h2 class="gold">INVESTIGAÇÃO CONCLUÍDA.</h2>
+<div class="line"></div>
+<p>Você procurou respostas em todos os arquivos.</p>
+<p>Mas existia uma pergunta que nenhum deles conseguia responder.</p>
+<h1 class="gold">VOCÊ ERA A RESPOSTA DESDE O COMEÇO.</h1>
+<div class="line"></div>
+<h2>Uma mensagem para você.</h2>
+<p>Feliz aniversário! ❤️<br><br>
+Existem pessoas que passam pela nossa vida e existem aquelas que fazem parte da nossa história. Você é uma dessas pessoas especiais.<br><br>
+Que seu novo ciclo seja cheio de conquistas, alegrias e momentos inesquecíveis. Nunca deixe de ser quem você é.<br><br>
+Com carinho,<br>Sarah.</p>
+<div class="line"></div>
+<h2 class="gold">SUA TRILHA SONORA</h2>
+<p>Uma playlist especial espera por você.</p>
+<a href="https://open.spotify.com/" target="_blank"><button>ABRIR PLAYLIST</button></a>
+<p class="small">END OF FILE • 001</p>
+</section>
+</div>
+
+<script>
+const files=[
+{q:"O que sempre avança, nunca volta e não pode ser guardado?",h:"Todos nós temos a mesma quantidade por dia.",a:["tempo"]},
+{q:"Quanto mais você tira, maior fica. O que é?",h:"Pense em algo que pode existir no chão.",a:["buraco"]},
+{q:"Tenho cidades, mas não tenho casas. Tenho rios, mas não tenho água. O que sou?",h:"Você pode me consultar para viajar.",a:["mapa"]},
+{q:"O que pertence a você, mas outras pessoas usam mais?",h:"Pense em como as pessoas chamam você.",a:["nome"]},
+{q:"Qual é a palavra que fica diferente quando recebe uma letra?",h:"Pense na palavra amor e no que ela pode virar.",a:["amore"]},
+{q:"O que pode ser quebrado sem nunca ser tocado?",h:"Uma promessa também pode ser...",a:["promessa"]},
+{q:"Qual música esconde a resposta neste arquivo?",h:"A pista é: 'Lábios cor de mel'.",a:["labios cor de mel","labios de cor de mel","unha pintada"]},
+{q:"Último arquivo: o que transforma momentos em lembranças e pessoas em histórias?",h:"A resposta está no que vocês construíram.",a:["memoria","lembrancas"]}
+];
+let current=0;
+function start(){
+document.getElementById("intro").classList.add("hidden");
+document.getElementById("game").classList.remove("hidden");
+showFile();
+}
+function showFile(){
+document.getElementById("number").textContent="ARQUIVO "+String(current+1).padStart(3,"0")+" / 008";
+document.getElementById("question").textContent=files[current].q;
+document.getElementById("hint").textContent=files[current].h;
+document.getElementById("answer").value="";
+document.getElementById("feedback").textContent="";
+}
+function normalize(s){
+return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().replace(/\s+/g," ");
+}
+function check(){
+let value=normalize(document.getElementById("answer").value);
+if(files[current].a.map(normalize).includes(value)){
+current++;
+if(current===files.length){
+document.getElementById("game").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+}else{showFile();}
+}else{
+document.getElementById("feedback").textContent="ACESSO NEGADO. INVESTIGUE NOVAMENTE.";
+}
+}
+</script>
+</body>
+</html>
