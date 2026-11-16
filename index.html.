@@ -193,5 +193,42 @@ function check(){
  }
 }
 </script>
+document.getElementById("feedback").textContent=
+ "ACESSO NEGADO. INVESTIGUE NOVAMENTE.";
+ }
+}
+</script>
+
+<!-- PLAYLIST -->
+<section class="playlist">
+  <p class="small">CLASSIFIED SOUNDTRACK</p>
+  <h2 class="gold">OUR SOUNDTRACK</h2>
+  <p>Algumas músicas guardam lembranças que palavras não conseguem explicar.</p>
+
+  <div class="song">🎵 Várias Queixas — Olodum</div>
+  <div class="song">🎵 Lábios Cor de Mel — Unha Pintada</div>
+  <div class="song">🎵 Nosso Amor — MC Pedrinho</div>
+  <div class="song">🎵 Flor e o Beija-Flor — Marília Mendonça</div>
+  <div class="song">🎵 I Wanna Be Yours — Arctic Monkeys (Legendado)</div>
+  <div class="song">🎵 Lonely</div>
+</section>
+
+<style>
+.playlist {
+  margin-top: 35px;
+  padding: 22px 12px;
+  border-top: 1px solid #b89548;
+}
+.song {
+  border: 1px solid #806b3e;
+  padding: 13px;
+  margin: 10px 0;
+  color: #e8d6a5;
+  background: #111;
+  font-size: 14px;
+}
+</style>
+</body>
+</html>
 </body>
 </html>
